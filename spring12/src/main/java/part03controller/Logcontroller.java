@@ -20,11 +20,14 @@ public class Logcontroller {
 	}
 
 	@RequestMapping("/logpro.do")
-	public String loginExecution(PersinDTO dto, HttpSession session) {
+	public String loginExecution(String returnUrl, PersinDTO dto, HttpSession session) {
 		if (dto.getId().equals("kim") && dto.getPass().equals("1234")) {
 			session.setAttribute("chk", dto.getId());
 			session.setMaxInactiveInterval(1000 * 60 * 30);
 			System.out.println(session.getAttribute("chk"));
+			if(returnUrl !="") {
+				return "redirect:/"+returnUrl;
+			}
 		}
 		return "redirect:/index.do";
 	}
